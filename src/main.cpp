@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <sstream>
 #include <fstream>
+#include <curl/curl.h>
+#include <checkUrl.h>
 #define SearchNode
 using namespace std;
 //ifstream lineStream ("listSites.txt");
@@ -26,10 +28,16 @@ int main() {
 			}
 			while(!file.eof()){
 				file >> ws;
-				file >> url;
-				cout << "url to insert: " << url << endl;
-				root = insert(root, url);
-				cout << "done inserting" << endl;
+				file >> url; 
+				int checkValid = check_url(url);
+				if(checkValid == 1){
+					cout << "url to insert: " << url << endl;
+					root = insert(root, url);
+					cout << "done inserting" << endl;
+				}else{
+					cout << "invalid" << endl;
+				}
+				
 			}
 		}else if(command == "printAll"){
 			printInorder(root);  
@@ -56,6 +64,6 @@ int main() {
         cout << "> ";
         getline(cin, line);
 	}
-	
+
 	return 0;
 }

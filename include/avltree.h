@@ -7,7 +7,6 @@ using namespace std;
 
 typedef string keyType;
 
-
 class node{
     public:
         keyType url;
